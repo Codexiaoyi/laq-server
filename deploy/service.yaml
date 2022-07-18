@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: laq-server
+spec:
+  selector:
+    app: laq-server
+  # 默认 ClusterIP 集群内可访问，NodePort 节点可访问，LoadBalancer 负载均衡模式（需要负载均衡器才可用）
+  type: NodePort
+  ports:
+    - port: 5002        # 本 Service 的端口
+      targetPort: 5002  # 容器端口
+      nodePort: 31000
