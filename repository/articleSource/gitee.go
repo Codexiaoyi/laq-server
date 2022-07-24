@@ -96,15 +96,15 @@ func (g *Gitee) GetArticleHtml(category string, articleName string) (string, err
 	htmlFlags := html.CommonFlags | html.HrefTargetBlank
 	renderFunc := func(w io.Writer, node ast.Node, entering bool) (ast.WalkStatus, bool) {
 		switch node.(type) {
-		case *ast.Image:
-			//这里将md中的图片在转换为html的时候替换
-			image := node.(*ast.Image)
-			name := string(image.Destination)
-			url, err := g.GetImageUrl(category, articleName, name)
-			if err != nil {
-				return ast.GoToNext, false
-			}
-			image.Destination = []byte(url)
+		// case *ast.Image:
+		// 	//这里将md中的图片在转换为html的时候替换
+		// 	image := node.(*ast.Image)
+		// 	name := string(image.Destination)
+		// 	url, err := g.GetImageUrl(category, articleName, name)
+		// 	if err != nil {
+		// 		return ast.GoToNext, false
+		// 	}
+		// 	image.Destination = []byte(url)
 		case *ast.CodeBlock:
 			code := node.(*ast.CodeBlock)
 			newCode, err := utils.ToGoSyntaxHighlight(code.Literal)
