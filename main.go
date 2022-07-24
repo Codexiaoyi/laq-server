@@ -9,7 +9,7 @@ import (
 )
 
 func main() {
-	linweb := linweb.NewLinWeb()
+	linweb := linweb.NewLinweb()
 	linweb.AddSingleton(&repository.SiteRepository{})
 	linweb.AddSingleton(&repository.ArticleRepository{}, &repository.CategoryRepository{})
 	linweb.AddMiddlewares(middlewares.Cors, middlewares.Logs)

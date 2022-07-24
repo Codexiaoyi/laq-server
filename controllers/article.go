@@ -6,7 +6,6 @@ import (
 	"linblog/repository"
 	"net/http"
 	"strconv"
-	"time"
 
 	"github.com/Codexiaoyi/linweb"
 	"github.com/Codexiaoyi/linweb/interfaces"
@@ -65,8 +64,8 @@ func (a *ArticleController) GetHomeArticles(c interfaces.IContext) {
 		response.Items = append(response.Items, dto)
 	}
 
-	//添加缓存，1小时过期
-	linweb.Cache.AddWithExpire(cacheKey, response, time.Hour*1)
+	//添加缓存
+	linweb.Cache.Add(cacheKey, response)
 
 	Response(c, http.StatusOK, response)
 }
@@ -95,7 +94,7 @@ func (a *ArticleController) GetArticleInfo(c interfaces.IContext) {
 		return
 	}
 
-	linweb.Cache.AddWithExpire(cacheKey, dto, time.Hour*1)
+	linweb.Cache.Add(cacheKey, dto)
 	Response(c, http.StatusOK, dto)
 }
 
@@ -117,7 +116,7 @@ func (a *ArticleController) GetArticleContent(c interfaces.IContext) {
 		return
 	}
 
-	linweb.Cache.AddWithExpire(cacheKey, article, time.Hour*1)
+	linweb.Cache.Add(cacheKey, article)
 	Response(c, http.StatusOK, article)
 }
 
