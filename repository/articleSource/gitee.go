@@ -124,7 +124,7 @@ func (g *Gitee) GetArticleHtml(category string, articleName string) (string, err
 }
 
 func (g *Gitee) GetImageUrl(category string, articleName string, imageName string) (string, error) {
-	return fmt.Sprintf("https://gitee.com/%s/%s/raw/master/%s/%s/%s", g.owner, g.repo, category, articleName, imageName), nil
+	return fmt.Sprintf("https://raw.githubusercontent.com/Codexiaoyi/laq-articles/main/%s/%s/%s", category, articleName, imageName), nil
 }
 
 func (g *Gitee) GetArticleInfo(category string, articleName string) (*model.Article, error) {
