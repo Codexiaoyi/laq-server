@@ -9,13 +9,19 @@ type CategoryRepository struct {
 }
 
 func (cate *CategoryRepository) GetCategories() []*model.Category {
-	cates, err := articleSource.Article.GetCategories()
+	authors, err := articleSource.Article.GetAuthors()
 	if err != nil {
 		return nil
 	}
-	res := make([]*model.Category, 0, len(cates))
-	for index, cate := range cates {
-		res = append(res, &model.Category{Id: index, Title: cate, Href: "category/" + cate})
+	res := make([]*model.Category, 0)
+	for _, author := range authors {
+		cates, err := articleSource.Article.GetCategories(author)
+		if err != nil {
+			return nil
+		}
+		for index, cate := range cates {
+			res = append(res, &model.Category{Id: index, Title: cate, Href: "category/" + cate})
+		}
 	}
 	return res
 }
