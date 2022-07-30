@@ -56,6 +56,7 @@ func (g *Github) GetAuthors() ([]string, error) {
 		return nil, err
 	}
 	authors := []*GithubResponse{}
+	fmt.Println(string(response))
 	err = json.Unmarshal([]byte(string(response)), &authors)
 	if err != nil {
 		return nil, err
