@@ -14,7 +14,6 @@ FROM alpine
 RUN apk update --no-cache && apk add --no-cache ca-certificates tzdata
 
 COPY --from=builder /bin /app
-COPY --from=builder /src/config.ini /app/config.ini
 COPY --from=builder /src/controllers /app/controllers
 
 WORKDIR /app
