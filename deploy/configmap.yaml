@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: laq-server-config
+data:
+  github_owner: Codexiaoyi
+  github_repo: laq-articles

@@ -19,3 +19,20 @@ spec:
       containers:
       - name: laq-server # 容器名字
         image: registry.cn-hangzhou.aliyuncs.com/linxiaoyi/laq-server:latest # 镜像
+        env:
+          - name: GITHUB_ACCESS_TOKEN
+            valueFrom:
+              secretKeyRef:
+                name: laq-server-secret
+                key: github_access_token
+                optional: true
+          - name: GITHUB_OWNER
+            valueFrom:
+              configMapKeyRef:
+                name: laq-server-config
+                key: github_owner
+          - name: GITHUB_REPO
+            valueFrom:
+              configMapKeyRef:
+                name: laq-server-config
+                key: github_repo

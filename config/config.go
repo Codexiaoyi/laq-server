@@ -1,11 +1,7 @@
 package config
 
 import (
-	"encoding/base64"
-	"fmt"
-	"log"
-
-	"gopkg.in/ini.v1"
+	"os"
 )
 
 var (
@@ -16,20 +12,15 @@ var (
 )
 
 func init() {
-	file, err := ini.Load("config.ini")
-	if err != nil {
-		fmt.Println("Load config file error!", err)
-	}
-	LoadSource(file)
+	LoadWithGithub()
 }
 
-//加载数据资源配置
-func LoadSource(file *ini.File) {
-	decodeBytes, err := base64.StdEncoding.DecodeString(file.Section("github").Key("AccessToken").MustString(""))
-	if err != nil {
-		log.Fatalln(err)
-	}
-	AccessToken = string(decodeBytes)
-	Owner = file.Section("github").Key("Owner").MustString("")
-	Repo = file.Section("github").Key("Repo").MustString("")
+func LoadWithGithub() {
+	AccessToken = getEnv("GITHUB_ACCESS_TOKEN")
+	Owner = getEnv("GITHUB_OWNER")
+	Repo = getEnv("GITHUB_REPO")
+}
+
+func getEnv(key string) string {
+	return os.Getenv(key)
 }
